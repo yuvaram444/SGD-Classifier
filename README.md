@@ -27,38 +27,62 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
-# Load the Iris dataset
+
+# Load dataset
 iris = load_iris()
-# Create a Pandas DataFrame
+
+# Create DataFrame
 df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
 df['target'] = iris.target
-# Display the first few rows of the dataset
+
 print(df.head())
-# Split the data into features (X) and target (y)
+
+# Split features and target
 X = df.drop('target', axis=1)
 y = df['target']
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,
-random_state=42)
-# Create an SGD classifier with default parameters
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Create and train model
 sgd_clf = SGDClassifier(max_iter=1000, tol=1e-3)
-# Train the classifier on the training data
 sgd_clf.fit(X_train, y_train)
-# Make predictions on the testing data
+
+# Predictions
 y_pred = sgd_clf.predict(X_test)
-# Evaluate the classifier's accuracy
+
+# Accuracy
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.3f}")
-# Calculate the confusion matrix
+
+# Confusion Matrix
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:")
 print(cm)
 
+# Plot confusion matrix
+plt.figure(figsize=(6,4))
+sns.heatmap(
+    cm,
+    annot=True,
+    cmap="Blues",
+    fmt='d',
+    xticklabels=iris.target_names,
+    yticklabels=iris.target_names
+)
+
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.title("Confusion Matrix")
+plt.show()
+
 ```
 
 ## Output:
+<img width="897" height="793" alt="image" src="https://github.com/user-attachments/assets/e2578bd6-08eb-4db5-b05e-7c302b04d99e" />
 
-<img width="752" height="357" alt="image" src="https://github.com/user-attachments/assets/a5d3862c-7c32-40d1-a65a-2090490ebf79" />
 
 
 
