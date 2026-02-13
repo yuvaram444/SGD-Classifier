@@ -58,6 +58,8 @@ print(cm)
 
 ## Output:
 
+<img width="752" height="357" alt="image" src="https://github.com/user-attachments/assets/a5d3862c-7c32-40d1-a65a-2090490ebf79" />
+
 
 
 
